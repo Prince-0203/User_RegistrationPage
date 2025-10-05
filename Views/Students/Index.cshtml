@@ -1,0 +1,54 @@
+﻿@model List<Student_RegistrationPage.Models.Student>
+@{
+    ViewData["Title"] = "Students List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Students List</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <strong>Registered Students</strong>
+        <a href="@Url.Action("Register", "Students")" class="btn btn-light btn-sm float-end">+ Add Student</a>
+    </div>
+    <div class="container mt-3">
+        <h5>Students</h5>
+        <p>Total: @Model.Count()</p>
+
+        @foreach (var student in Model)
+        {
+            <div class="card mb-3" style="max-width: 600px;">
+                <div class="row g-0">
+                    <!-- Image Placeholder -->
+                    <div class="col-md-2 d-flex align-items-center justify-content-center">
+                        <img src="~/images/@student.ImagePath"
+                             class="img-fluid rounded-start"
+                             alt="student image" style="max-width:80px;" />
+                    </div>
+
+                    <!-- Student Details -->
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h6 class="card-title"><strong>@student.FirstName @student.LastName</strong></h6>
+                            <span>Email: @student.Email</span>
+                            <p class="card-text mb-1">
+                                Roll No: @student.RollNumber <br />
+                                <!--Created: student.CreatedDate.ToString("dd/MM/yyyy")-->
+                            </p>
+
+                            <!-- Delete button -->
+                            <form asp-action="Delete" asp-route-id="@student.StudentId" method="post">
+                                <button type="submit" class="btn btn-sm btn-secondary">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
