@@ -1,0 +1,6 @@
+SQLQuery2.sql - PRINCE.Db_std (sa (55))
+
+- Querying transaction count (Success)
+
+
+

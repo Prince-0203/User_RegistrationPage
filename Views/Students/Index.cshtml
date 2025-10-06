@@ -10,6 +10,10 @@
 {
     <div class="alert alert-success">@TempData["Success"]</div>
 }
+else if (ViewData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@ViewData["ErrorMessage"]</div>
+}
 
 <div class="card">
     <div class="card-header bg-primary text-white">
@@ -24,7 +28,7 @@
         {
             <div class="card mb-3" style="max-width: 600px;">
                 <div class="row g-0">
-                    <!-- Image Placeholder -->
+                    <!-- Image  -->
                     <div class="col-md-2 d-flex align-items-center justify-content-center">
                         <img src="~/images/@student.ImagePath"
                              class="img-fluid rounded-start"
@@ -38,13 +42,16 @@
                             <span>Email: @student.Email</span>
                             <p class="card-text mb-1">
                                 Roll No: @student.RollNumber <br />
-                                <!--Created: student.CreatedDate.ToString("dd/MM/yyyy")-->
+                                Created: @student.CreatedDate.ToString("dd/MM/yyyy")
                             </p>
 
                             <!-- Delete button -->
-                            <form asp-action="Delete" asp-route-id="@student.StudentId" method="post">
-                                <button type="submit" class="btn btn-sm btn-secondary">Delete</button>
+                            <form asp-action="Delete" asp-route-id="@student.StudentId" method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this student?');"
+                                  style="display:inline">
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
