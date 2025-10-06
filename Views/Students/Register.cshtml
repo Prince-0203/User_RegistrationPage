@@ -1,95 +1,82 @@
-﻿@model Student_RegistrationPage.Models.Student
-@{
-    ViewData["Title"] = "Student Registration";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿    @model Student_RegistrationPage.Models.Student
+    @{
+        ViewData["Title"] = "Student Registration";
+    }
 
-<h2>Student Registration</h2>
+    <h2>Student Registration</h2>
 
-<div class="card mb-5">
-    <div class="card-header bg-primary text-white">
-        <strong>Register Student</strong>
+    <div class="card mb-5">
+        <div class="card-header bg-primary text-white">
+            <strong>Register Student</strong>
+        </div>
+        <div class="card-body">
+            <form asp-action="Register" method="post" enctype="multipart/form-data">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="FirstName" class="form-label"></label>
+                        <span class="text-danger">*</span>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="LastName" class="form-label"></label>
+                        <span class="text-danger">*</span>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label"></label>
+                        <span class="text-danger">*</span>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="RollNumber" class="form-label"></label>
+                        <span class="text-danger">*</span>
+                        <input asp-for="RollNumber" class="form-control" />
+                        <span asp-validation-for="RollNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Gender</label>
+                        <span class="text-danger">*</span>
+                        <br />
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Male" id="genderMale" />
+                            <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Female" id="genderFemale" />
+                            <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Other" id="genderOther" />
+                            <label class="form-check-label" for="genderOther">Other</label>
+                        </div>
+                        <br />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ImagePath" class="form-label">Upload Image</label>
+                        <input type="file" name="imageFile" class="form-control" />
+                        @if (!string.IsNullOrEmpty(Model?.ImagePath))
+                        {
+                            <img src="~/images/@Model.ImagePath" class="mt-2" style="width:80px;height:80px;" />
+                        }
+                    </div>
+                </div>
+
+                <br />
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="reset" class="btn btn-secondary ms-2">Reset</button>
+
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-        <form asp-action="Register" method="post" enctype="multipart/form-data">
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label asp-for="FirstName" class="form-label"></label>
-                    <span class="text-danger">*</span>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="col-md-6">
-                    <label asp-for="LastName" class="form-label"></label>
-                    <span class="text-danger">*</span>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label asp-for="Email" class="form-label"></label>
-                    <span class="text-danger">*</span>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="col-md-6">
-                    <label asp-for="RollNumber" class="form-label"></label>
-                    <span class="text-danger">*</span>
-                    <input asp-for="RollNumber" class="form-control" />
-                    <span asp-validation-for="RollNumber" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">Gender</label>
-                    <span class="text-danger">*</span>
-                    <br />
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" asp-for="Gender" value="Male" id="genderMale" />
-                        <label class="form-check-label" for="genderMale">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" asp-for="Gender" value="Female" id="genderFemale" />
-                        <label class="form-check-label" for="genderFemale">Female</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" asp-for="Gender" value="Other" id="genderOther" />
-                        <label class="form-check-label" for="genderOther">Other</label>
-                    </div>
-                    <br />
-                    <span asp-validation-for="Gender" class="text-danger"></span>
-                </div>
-                <div class="col-md-6">
-                    <label asp-for="ImagePath" class="form-label">Upload Image</label>
-                    <input type="file" name="imageFile" class="form-control" />
-                    @if (!string.IsNullOrEmpty(Model?.ImagePath))
-                    {
-                        <img src="~/images/@Model.ImagePath" class="mt-2" style="width:80px;height:80px;" />
-                    }
-                </div>
-            </div>
-
-            <br />
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-
-    <script>
-        $('#FirstName, #LastName').on('keypress', function (e) {
-            var regex = new RegExp("^[a-zA-Z\\s]+$");
-            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-            if (!regex.test(str)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-    </script>
-}
